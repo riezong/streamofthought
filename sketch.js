@@ -23,7 +23,8 @@ function draw() {
     vid.position(x, y);
     vid.size(width, height);
     //    vid.showControls();
-    vid.play();
+    //    Testing to see if this solves autoplay on mobile
+    vid.autoplay();
     vid.speed(3);
     vid.onended(sayDone);
     noLoop();
