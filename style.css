@@ -1,0 +1,90 @@
+html, body {
+  height: 100%;
+  overflow-y: scroll;
+}
+
+/* This doesn't really work... */
+#canvas-container {
+/*
+  height: 100%;
+  margin: 0;
+  display: flex;
+
+  margin-top: -40px;
+*/
+
+  /* This centers our sketch horizontally. */
+  justify-content: center;
+
+  /* This centers our sketch vertically. */
+  align-items: center;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+#wrapper{
+    display: block;
+    max-width: 960px;
+    margin: 0 auto;
+}
+
+
+/* --------------- */
+/*    NAVIGATION   */
+/*   DO NOT EDIT   */
+/* --------------- */
+
+nav{
+    background-color: light;
+    display: block;
+    max-width: 960px;
+    font-family: "Andale Mono", sans-serif;
+    font-weight: auto;
+}
+
+ul{
+    list-style-type: none;
+    margin: 0;
+    overflow: hidden;
+    background-color: #333333;
+}
+
+
+li{
+    float: right;
+    color: lightgray;
+}
+
+li a{
+    float: right;
+    padding: 10px;
+    border-width: 0 0 0 1px;
+    border-style: solid;
+    border-color: darkgray;
+    text-decoration: none;
+    color:lightgray;
+}
+
+a:visited{
+  color:lightgray;
+}
+
+li.main-title{
+  float: left;
+  padding: 10px;
+}
+
+li:last-child a{
+    border-width: 0;
+}
+
+li a:hover{
+    color: lightblue;
+}
+
+li.current a{
+  color: dimgray;
+}
