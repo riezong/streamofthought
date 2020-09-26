@@ -93,7 +93,7 @@ function title() {
     var y = (windowHeight - height) / 2;
     vid.position(x, y);
     vid.size(width, height);
-    vid.play();
+    vid.showControls();
     vid.speed(0);
     vid.onended(sayDone);
     videoPlaying = true;
