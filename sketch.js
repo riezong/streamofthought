@@ -1,6 +1,18 @@
 var canv = createCanvas;
 var vid;
 
+// Scene counter
+var scene;
+var endCounter;
+var endTrue;
+
+// Countdown timer variables
+var timerTitle;
+var timerRotate;
+var countdown;
+var timer;
+var state;
+
 function setup() {
     // put setup code here
     var canv = createCanvas(1920 / 2, 1080 / 2);
@@ -8,26 +20,137 @@ function setup() {
     canv.parent("canvas-container");
     //    background('#ff8800');
 
+    scene = 1;
+    endCounter = 0;
+    endTrue = 4;
 
-    //    var scene = 1;
+    // Countdown timer setup
+    timerTitle = 10000;
+    timerRotate = 5000;
+    timer = millis() + timerTitle;
+    state = 0;
+    
+    // Typography (Totally optional)
+    textAlign(CENTER);
 }
 
 function draw() {
     // put drawing code here
-    //    background('#ff8800');
+    background('#ff8800');
+    //    scene = 1;
 
     // Load video
-    vid = createVideo("https://riezong.github.io/streamofthought/data/Opening.mp4");
-    var x = (windowWidth - width) / 2;
-    var y = (windowHeight - height) / 2;
-    vid.position(x, y);
-    vid.size(width, height);
-    //    vid.showControls();
-    //    Testing to see if this solves autoplay on mobile
-    vid.autoplay();
-    vid.speed(3);
-    vid.onended(sayDone);
-    noLoop();
+    //    vid = createVideo("https://riezong.github.io/streamofthought/data/Opening.mp4");
+    //    var x = (windowWidth - width) / 2;
+    //    var y = (windowHeight - height) / 2;
+    //    vid.position(x, y);
+    //    vid.size(width, height);
+    // Testing to see if this solves autoplay on mobile
+    //    vid.autoplay();
+    //    vid.speed(3);
+    //    vid.onended(sayDone);
+    //    noLoop();
+    //    }
+
+    // Scene 1
+    if (scene == 1) {
+        background('#ffffff');
+
+        // Timer
+        countdown = ceil((timer - millis()) / 1000);
+        if (state == 0) {
+            text("T-minus " + countdown, width/2, height/2-10);
+            text("Rotation " + endCounter, width/2, height/2+10);
+        } else if (state == 1) {
+            scene = 2;
+            state = 0;
+        }
+        if (timer < millis()) {
+            timer = millis() + timerRotate; // Reset timer
+            state = 1;
+        }
+    }
+
+    // Scene 2
+    if (scene == 2) {
+        background('#000000')
+        fill(255);
+
+        // Timer
+        countdown = ceil((timer - millis()) / 1000);
+        if (state == 0) {
+            text("T-minus " + countdown, width/2, height/2-10);
+            text("Rotation " + endCounter, width/2, height/2+10);
+        } else if (state == 1) {
+            scene = 3;
+            state = 0;
+        }
+        if (timer < millis()) {
+            timer = millis() + timerRotate;
+            state = 1;
+        }
+    }
+
+    // Scene 3
+    if (scene == 3) {
+        background('#ff8800')
+        fill(255);
+
+        // Timer
+        countdown = ceil((timer - millis()) / 1000);
+        if (state == 0) {
+            text("T-minus " + countdown, width/2, height/2-10);
+            text("Rotation " + endCounter, width/2, height/2+10);
+        } else if (state == 1) {
+            scene = 4;
+            state = 0;
+        }
+        if (timer < millis()) {
+            timer = millis() + timerRotate;
+            state = 1;
+        }
+
+        // Switch to end scene
+        if (endCounter == endTrue) {
+            scene = 4;
+        }
+    }
+    
+    // Scene 4
+    if (scene == 4) {
+        background('#333333')
+        fill(255);
+
+        // Timer
+        countdown = ceil((timer - millis()) / 1000);
+        if (state == 0) {
+            text("T-minus " + countdown, width/2, height/2-10);
+            text("Rotation " + endCounter, width/2, height/2+10);
+        } else if (state == 1) {
+            scene = 2;
+            state = 0;
+        }
+        if (timer < millis()) {
+            timer = millis() + timerRotate;
+            endCounter = endCounter + 1;
+            state = 1;
+        }
+
+        // Switch to end scene
+        if (endCounter == endTrue) {
+            scene = 5;
+        }
+    }
+
+    // Scene 5
+    if (scene == 5) {
+        background('#f8f8f8')
+        fill(0);
+
+        text("T-minus " + countdown, width/2, height/2-10);
+            text("Rotation " + endCounter, width/2, height/2+10);
+        text("Yay, you made it to the end!", width/2, height/2+30);
+    }
 }
 
 function onVideoLoad() {
