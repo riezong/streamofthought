@@ -22,7 +22,7 @@ function setup() {
     // canv.parent("canvas-container");
     createCanvas(1920 / 2, 1080 / 2);
 
-    scene = 1;
+    scene = 0;
     endCounter = 0;
     endTrue = 4;
 
@@ -40,9 +40,16 @@ function draw() {
     // put drawing code here
     background('#ff8800');
 
+    // Scene 0
+    if (scene == 0) {
+        text("Hello world.", width / 2, height / 2 - 10);
+        text("Click to continue", width / 2, height / 2 + 10);
+    }
+
     // Scene 1
     if (scene == 1) {
 
+        background('#ff8800')
         if (videoPlaying == false) {
             title();
         } else {
@@ -53,6 +60,7 @@ function draw() {
                 text("Rotation " + endCounter, width / 2, height / 2 + 10);
             } else if (state == 1) {
                 scene = 2;
+                videoPlaying = false;
                 state = 0;
             }
             if (timer < millis()) {
@@ -65,7 +73,27 @@ function draw() {
 
     // Scene 2
     if (scene == 2) {
-        tap();
+        if (videoPlaying == false) {
+            tap();
+        } else {
+            fill(255);
+
+            // Timer
+            countdown = ceil((timer - millis()) / 1000);
+            if (state == 0) {
+                text("T-minus " + countdown, width / 2, height / 2 - 10);
+                text("Rotation " + endCounter + "A", width / 2, height / 2 + 10);
+            } else if (state == 1) {
+                scene = 3;
+                videoPlaying = false;
+                state = 0;
+            }
+            if (timer < millis()) {
+                timer = millis() + timerRotate;
+                vid.hide();
+                state = 1;
+            }
+        }
     }
 
     // Scene 3
@@ -85,7 +113,7 @@ function draw() {
 }
 
 function title() {
-    //    background('#ffffff');
+    // background('#ffffff');
 
     // Load video
     vid = createVideo("https://riezong.github.io/streamofthought/data/Opening.mp4");
@@ -93,7 +121,7 @@ function title() {
     var y = (windowHeight - height) / 2;
     vid.position(x, y);
     vid.size(width, height);
-    vid.showControls();
+    vid.play();
     vid.speed(0);
     vid.onended(sayDone);
     videoPlaying = true;
@@ -101,21 +129,17 @@ function title() {
 
 function tap() {
     background('#000000')
-    fill(255);
 
-    // Timer
-    countdown = ceil((timer - millis()) / 1000);
-    if (state == 0) {
-        text("T-minus " + countdown, width / 2, height / 2 - 10);
-        text("Rotation " + endCounter, width / 2, height / 2 + 10);
-    } else if (state == 1) {
-        scene = 3;
-        state = 0;
-    }
-    if (timer < millis()) {
-        timer = millis() + timerRotate;
-        state = 1;
-    }
+    // Load video
+    vid = createVideo("https://riezong.github.io/streamofthought/data/Opening.mp4");
+    var x = (windowWidth - width) / 2;
+    var y = (windowHeight - height) / 2;
+    vid.position(x, y);
+    vid.size(width, height);
+    vid.play();
+    vid.speed(0);
+    vid.onended(sayDone);
+    videoPlaying = true;
 }
 
 function shower() {
@@ -126,7 +150,7 @@ function shower() {
     countdown = ceil((timer - millis()) / 1000);
     if (state == 0) {
         text("T-minus " + countdown, width / 2, height / 2 - 10);
-        text("Rotation " + endCounter, width / 2, height / 2 + 10);
+        text("Rotation " + endCounter + "B", width / 2, height / 2 + 10);
     } else if (state == 1) {
         scene = 4;
         state = 0;
@@ -150,7 +174,7 @@ function memory() {
     countdown = ceil((timer - millis()) / 1000);
     if (state == 0) {
         text("T-minus " + countdown, width / 2, height / 2 - 10);
-        text("Rotation " + endCounter, width / 2, height / 2 + 10);
+        text("Rotation " + endCounter + "C", width / 2, height / 2 + 10);
     } else if (state == 1) {
         scene = 2;
         state = 0;
@@ -180,6 +204,11 @@ function onVideoLoad() {
     // The media will not play untill some explicitly triggered.
     vid.autoplay(true);
     vid.volume(0);
+}
+
+// Fix autoplay issue on Chrome
+function mousePressed() {
+    scene = 1;
 }
 
 function sayDone(elt) {
