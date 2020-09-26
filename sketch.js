@@ -17,10 +17,10 @@ var videoPlaying = false;
 
 function setup() {
     // put setup code here
-    // var canv = createCanvas(1920 / 2, 1080 / 2);
-    // // make div#canvas-container the parent of the created canvas
-    // canv.parent("canvas-container");
-    createCanvas(1920 / 2, 1080 / 2);
+    var canv = createCanvas(1920 / 2, 1080 / 2);
+    // make div#canvas-container the parent of the created canvas
+    canv.parent("canvas-container");
+    //    createCanvas(1920 / 2, 1080 / 2);
 
     scene = 0;
     endCounter = 0;
@@ -37,22 +37,23 @@ function setup() {
 }
 
 function draw() {
-    // put drawing code here
-    background('#ff8800');
+    // put drawing code here    
 
     // Scene 0
     if (scene == 0) {
+        background('#ff8800');
         text("Hello world.", width / 2, height / 2 - 10);
         text("Click to continue", width / 2, height / 2 + 10);
     }
 
     // Scene 1
     if (scene == 1) {
-
-        background('#ff8800')
         if (videoPlaying == false) {
             title();
         } else {
+            background('#f8f8f8');
+            fill(0);
+
             // Timer
             countdown = ceil((timer - millis()) / 1000);
             if (state == 0) {
@@ -60,12 +61,12 @@ function draw() {
                 text("Rotation " + endCounter, width / 2, height / 2 + 10);
             } else if (state == 1) {
                 scene = 2;
+                vid.hide();
                 videoPlaying = false;
                 state = 0;
             }
             if (timer < millis()) {
                 timer = millis() + timerRotate; // Reset timer
-                vid.hide();
                 state = 1;
             }
         }
@@ -76,7 +77,8 @@ function draw() {
         if (videoPlaying == false) {
             tap();
         } else {
-            fill(255);
+            background('#f8f8f8');
+            fill(0);
 
             // Timer
             countdown = ceil((timer - millis()) / 1000);
@@ -85,12 +87,12 @@ function draw() {
                 text("Rotation " + endCounter + "A", width / 2, height / 2 + 10);
             } else if (state == 1) {
                 scene = 3;
+                vid.hide();
                 videoPlaying = false;
                 state = 0;
             }
             if (timer < millis()) {
                 timer = millis() + timerRotate;
-                vid.hide();
                 state = 1;
             }
         }
@@ -117,8 +119,8 @@ function title() {
 
     // Load video
     vid = createVideo("https://riezong.github.io/streamofthought/data/Opening.mp4");
-    var x = (windowWidth - width) / 2;
-    var y = (windowHeight - height) / 2;
+    var x = (windowWidth - width) / 2 - 15;
+    var y = (windowHeight - height) / 2 - 2;
     vid.position(x, y);
     vid.size(width, height);
     vid.play();
@@ -128,12 +130,12 @@ function title() {
 }
 
 function tap() {
-    background('#000000')
+    background('#f8f8f8');
 
     // Load video
     vid = createVideo("https://riezong.github.io/streamofthought/data/Opening.mp4");
-    var x = (windowWidth - width) / 2;
-    var y = (windowHeight - height) / 2;
+    var x = (windowWidth - width) / 2 - 15;
+    var y = (windowHeight - height) / 2 - 2;
     vid.position(x, y);
     vid.size(width, height);
     vid.play();
@@ -143,8 +145,8 @@ function tap() {
 }
 
 function shower() {
-    background('#ff8800')
-    fill(255);
+    background('#f8f8f8');
+    fill(0);
 
     // Timer
     countdown = ceil((timer - millis()) / 1000);
@@ -167,8 +169,8 @@ function shower() {
 }
 
 function memory() {
-    background('#333333')
-    fill(255);
+    background('#f8f8f8');
+    fill(0);
 
     // Timer
     countdown = ceil((timer - millis()) / 1000);
@@ -208,7 +210,9 @@ function onVideoLoad() {
 
 // Fix autoplay issue on Chrome
 function mousePressed() {
-    scene = 1;
+    if (scene == 0) {
+        scene = 1;
+    } else {}
 }
 
 function sayDone(elt) {
