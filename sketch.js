@@ -1,4 +1,4 @@
-var canv = createCanvas;
+//var canv = createCanvas;
 var vid;
 
 // Scene counter
@@ -17,10 +17,10 @@ var videoPlaying = false;
 
 function setup() {
     // put setup code here
-    var canv = createCanvas(1920 / 2, 1080 / 2);
-    // make div#canvas-container the parent of the created canvas
-    canv.parent("canvas-container");
-    // background('#ff8800');
+    // var canv = createCanvas(1920 / 2, 1080 / 2);
+    // // make div#canvas-container the parent of the created canvas
+    // canv.parent("canvas-container");
+    createCanvas(1920 / 2, 1080 / 2);
 
     scene = 1;
     endCounter = 0;
@@ -85,7 +85,7 @@ function draw() {
 }
 
 function title() {
-    background('#ffffff');
+    //    background('#ffffff');
 
     // Load video
     vid = createVideo("https://riezong.github.io/streamofthought/data/Opening.mp4");
