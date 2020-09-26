@@ -6,7 +6,7 @@ function setup() {
     var canv = createCanvas(1920 / 2, 1080 / 2);
     // make div#canvas-container the parent of the created canvas
     canv.parent("canvas-container");
-    //    background('#ff8800');
+    background('#ff8800');
 
 
     //    var scene = 1;
@@ -14,7 +14,6 @@ function setup() {
 
 function draw() {
     // put drawing code here
-    //    background('#ff8800');
 
     // Load video
     vid = createVideo("https://riezong.github.io/streamofthought/data/Opening.mp4");
@@ -23,7 +22,6 @@ function draw() {
     vid.position(x, y);
     vid.size(width, height);
     //    vid.showControls();
-    //    Testing to see if this solves autoplay on mobile
     vid.autoplay();
     vid.speed(3);
     vid.onended(sayDone);
