@@ -42,20 +42,24 @@ function draw() {
 
     // Scene 1
     if (scene == 1) {
-        title();
-        // Timer
-        countdown = ceil((timer - millis()) / 1000);
-        if (state == 0) {
-            text("T-minus " + countdown, width / 2, height / 2 - 10);
-            text("Rotation " + endCounter, width / 2, height / 2 + 10);
-        } else if (state == 1) {
-            scene = 2;
-            state = 0;
-        }
-        if (timer < millis()) {
-            timer = millis() + timerRotate; // Reset timer
-            
-            state = 1;
+
+        if (videoPlaying == false) {
+            title();
+        } else {
+            // Timer
+            countdown = ceil((timer - millis()) / 1000);
+            if (state == 0) {
+                text("T-minus " + countdown, width / 2, height / 2 - 10);
+                text("Rotation " + endCounter, width / 2, height / 2 + 10);
+            } else if (state == 1) {
+                scene = 2;
+                state = 0;
+            }
+            if (timer < millis()) {
+                timer = millis() + timerRotate; // Reset timer
+                vid.hide();
+                state = 1;
+            }
         }
     }
 
@@ -83,21 +87,16 @@ function draw() {
 function title() {
     background('#ffffff');
 
-//    if (videoPlaying == false) {
-        // Load video
-        vid = createVideo("https://riezong.github.io/streamofthought/data/Opening.mp4");
-        var x = (windowWidth - width) / 2;
-        var y = (windowHeight - height) / 2;
-        vid.position(x, y);
-        vid.size(width, height);
-        vid.speed(3);
-        vid.onended(sayDone);
-        // noLoop();
-//        videoPlaying = true;
-//    } else if (videoPlaying == true) {
-//
-//
-//    }
+    // Load video
+    vid = createVideo("https://riezong.github.io/streamofthought/data/Opening.mp4");
+    var x = (windowWidth - width) / 2;
+    var y = (windowHeight - height) / 2;
+    vid.position(x, y);
+    vid.size(width, height);
+    vid.play();
+    vid.speed(0);
+    vid.onended(sayDone);
+    videoPlaying = true;
 }
 
 function tap() {
