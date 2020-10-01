@@ -13,7 +13,13 @@ var countdown;
 var timer;
 var state;
 
+var mySound;
 var videoPlaying = false;
+
+function preload() {
+    // soundFormats('mp3', 'ogg');
+     // mySound = loadSound('data/Meeting_Again.mp3');
+}
 
 function setup() {
     // put setup code here
@@ -27,7 +33,7 @@ function setup() {
     endTrue = 4;
 
     // Countdown timer setup
-    timerTitle = 10000;
+    timerTitle = 20000;
     timerRotate = 5000;
     timer = millis() + timerTitle;
     state = 0;
@@ -48,6 +54,7 @@ function draw() {
 
     // Scene 1
     if (scene == 1) {
+        // mySound.play();
         if (videoPlaying == false) {
             title();
         } else {
@@ -119,8 +126,8 @@ function title() {
 
     // Load video
     vid = createVideo("https://riezong.github.io/streamofthought/data/Opening.mp4");
-    var x = (windowWidth - width) / 2 - 15;
-    var y = (windowHeight - height) / 2 - 2;
+    var x = (windowWidth - width) / 2;
+    var y = (windowHeight - height) / 2;
     vid.position(x, y);
     vid.size(width, height);
     vid.play();
@@ -134,8 +141,8 @@ function tap() {
 
     // Load video
     vid = createVideo("https://riezong.github.io/streamofthought/data/Opening.mp4");
-    var x = (windowWidth - width) / 2 - 15;
-    var y = (windowHeight - height) / 2 - 2;
+    var x = (windowWidth - width) / 2;
+    var y = (windowHeight - height) / 2;
     vid.position(x, y);
     vid.size(width, height);
     vid.play();
