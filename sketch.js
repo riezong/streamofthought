@@ -22,7 +22,7 @@ var videoPlaying = false;
 
 // Total video files per scene in whole number
 var tapFrames = 2;
-var bathroomFrames = 4;
+var bathroomFrames = 6;
 var objectsFrames = 3;
 
 // Used to generate a pull a random animation for each scene
@@ -45,6 +45,8 @@ var bathroom = [
         "https://riezong.github.io/streamofthought/data/Shower Door Handle.mp4",
         "https://riezong.github.io/streamofthought/data/Shower Door.mp4",
         "https://riezong.github.io/streamofthought/data/Shower Drain Inverted.mp4",
+        "https://riezong.github.io/streamofthought/data/Shower Faucet.mp4",
+        "https://riezong.github.io/streamofthought/data/Shower Head Running.mp4",
     ];
 
 var objects = [
@@ -209,6 +211,14 @@ function draw() {
             if (bathroomi == 3) {
                 PlaceofRecall(width / 5 * 3, height / 5 * 4);
             }
+            // Shower Faucet
+            if (bathroomi == 4) {
+                PlaceofRecall(width / 5 * 3, height / 5 * 2);
+            }
+            // Shower Head
+            if (bathroomi == 5) {
+                PlaceofRecall(width / 5 * 4, height / 5 * 1);
+            }
         } else {
             background('#FFFFFF');
             fill(0);
@@ -279,17 +289,18 @@ function draw() {
                 }
                 objectsi = j;
                 state = 0;
+
+
+                // Switch to end scene
+                if (endCounter == endTrue) {
+                    scene = 6;
+                }
             }
             if (timer < millis()) {
                 timer = millis() + timerRotate;
                 endCounter = endCounter + 1;
                 state = 1;
                 // print("EndCounter" + endCounter);
-            }
-
-            // Switch to end scene
-            if (endCounter == endTrue) {
-                scene = 6;
             }
         }
     }
