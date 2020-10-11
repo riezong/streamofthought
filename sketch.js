@@ -76,7 +76,7 @@ function setup() {
     timerRotate = 4000;
     timer = millis() + timerTitle;
     state = 0;
-    
+
     fade = 0;
 
     // Typography (Totally optional)
@@ -297,7 +297,12 @@ function draw() {
     // End
     if (scene == 6) {
         showerSFX.setVolume(0, 0.5);
-        end();
+        if (videoPlaying == false) {
+            end();
+        } else {
+            background('#FFFFFF');
+            fill(0);
+        }
     }
 }
 
@@ -367,15 +372,25 @@ function end() {
     background('#FFFFFF')
     fill(0);
 
-    text("Sometimes you’ll never", width / 2, height / 2 - 30);
-    text("know the value of a moment,", width / 2, height / 2 - 10);
-    text("until it becomes a memory.", width / 2, height / 2 + 10);
-    text("Dr Seuss", width / 2, height / 2 + 30);
-    
-    // Text fade
-    if (fade < 0) fadeAmount = 1;
-    if (fade > 255) fadeAmount = -10;
-    fade += fadeAmount;
+    vid = createVideo("https://riezong.github.io/streamofthought/data/Ending.mp4");
+    var x = (windowWidth - width / 2) / 2 - 15;
+    var y = (windowHeight - height / 2) / 2 - 2;
+    vid.position(x, y);
+    vid.size(width / 2, height / 2);
+    vid.play();
+    vid.speed(0);
+    vid.onended(sayDone);
+    videoPlaying = true;
+
+    // text("Sometimes you’ll never", width / 2, height / 2 - 30);
+    // text("know the value of a moment,", width / 2, height / 2 - 10);
+    // text("until it becomes a memory.", width / 2, height / 2 + 10);
+    // text("Dr Seuss", width / 2, height / 2 + 30);
+    //    
+    // // Text fade
+    // if (fade < 0) fadeAmount = 1;
+    // if (fade > 255) fadeAmount = -10;
+    // fade += fadeAmount;
 }
 
 function onVideoLoad() {
