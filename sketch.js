@@ -14,7 +14,10 @@ var countdown;
 var timer;
 var state;
 
-var mySound;
+// Fadein variables
+var fade;
+var fadeAmount = 1
+
 var videoPlaying = false;
 
 // Total video files per scene in whole number
@@ -50,33 +53,6 @@ var objects = [
         "https://riezong.github.io/streamofthought/data/VHS.mp4",
     ];
 
-var positionX = [
-    2,
-    1,
-    4,
-    0,
-    1,
-    2,
-    3,
-    2,
-    1,
-    3
-    ]
-
-var positionY = [
-    0,
-    1,
-    1,
-    2,
-    2,
-    2,
-    2,
-    3,
-    4,
-    4,
-    ]
-
-
 function preload() {
     soundFormats('mp3', 'ogg');
     song = loadSound('https://riezong.github.io/streamofthought/data/Meeting_Again.mp3');
@@ -89,6 +65,7 @@ function setup() {
     // make div#canvas-container the parent of the created canvas
     // canv.parent("canvas-container");
     createCanvas(windowWidth - 30, windowHeight - 45);
+    print("Dedicated to Louisa Liu")
 
     scene = 0;
     endCounter = 0;
@@ -99,17 +76,19 @@ function setup() {
     timerRotate = 4000;
     timer = millis() + timerTitle;
     state = 0;
+    
+    fade = 0;
 
     // Typography (Totally optional)
     textAlign(CENTER);
-
-    // mySound.play();
+    textFont('Helvetica');
+    textSize(18);
+    //    textStyle('bold');
 
     // Generate first set of scenes
     tapi = int(random(tapFrames));
     bathroomi = int(random(bathroomFrames));
     objectsi = int(random(objectsFrames));
-    print(tapi);
 }
 
 function draw() {
@@ -118,8 +97,9 @@ function draw() {
     // Scene 0
     if (scene == 0) {
         background('#ff8800');
-        text("Hello world.", width / 2, height / 2 - 10);
-        text("Click to continue", width / 2, height / 2 + 10);
+        fill(255);
+        text("When you are ready,", width / 2, height / 2 - 10);
+        text("please click to start.", width / 2, height / 2 + 10);
     }
 
     // Introduction
@@ -133,13 +113,13 @@ function draw() {
             // Timer
             countdown = ceil((timer - millis()) / 1000);
             if (state == 0) {
-                text("T-minus " + countdown, width / 2, height / 2 - 10);
-                text("Rotation " + endCounter, width / 2, height / 2 + 10);
+                // text("T-minus " + countdown, width / 2, height / 2 - 10);
+                // text("Rotation " + endCounter, width / 2, height / 2 + 10);
             } else if (state == 1) {
 
                 vid.hide();
                 videoPlaying = false;
-                showerSFX.setVolume(0, 1, 60000);
+                showerSFX.setVolume(0.5);
                 showerSFX.play();
                 state = 0;
                 scene = 3;
@@ -185,8 +165,8 @@ function draw() {
             // Timer
             countdown = ceil((timer - millis()) / 1000);
             if (state == 0) {
-                text("T-minus " + countdown, width / 2, height / 2 - 10);
-                text("Rotation " + endCounter + "A", width / 2, height / 2 + 10);
+                // text("T-minus " + countdown, width / 2, height / 2 - 10);
+                // text("Rotation " + endCounter + "A", width / 2, height / 2 + 10);
             } else if (state == 1) {
                 scene = 4;
                 vid.hide();
@@ -194,10 +174,10 @@ function draw() {
 
                 //Generate new frame    
                 var j = int(random(tapFrames));
-                print(tapi, j);
+                // print(tapi, j);
                 while (j == tapi) {
                     j = int(random(tapFrames));
-                    print("match");
+                    // print("match");
                 }
                 tapi = j;
 
@@ -236,8 +216,8 @@ function draw() {
             // Timer
             countdown = ceil((timer - millis()) / 1000);
             if (state == 0) {
-                text("T-minus " + countdown, width / 2, height / 2 - 10);
-                text("Rotation " + endCounter + "B", width / 2, height / 2 + 10);
+                // text("T-minus " + countdown, width / 2, height / 2 - 10);
+                // text("Rotation " + endCounter + "B", width / 2, height / 2 + 10);
             } else if (state == 1) {
                 scene = 5;
                 vid.hide();
@@ -245,10 +225,10 @@ function draw() {
 
                 //Generate new frame    
                 var j = int(random(bathroomFrames));
-                print(bathroomi, j);
+                // print(bathroomi, j);
                 while (j == bathroomi) {
                     j = int(random(bathroomFrames));
-                    print("match");
+                    // print("match");
                 }
                 bathroomi = j;
 
@@ -266,7 +246,7 @@ function draw() {
         if (videoPlaying == false) {
             // Heater Light
             if (objectsi == 0) {
-                Mnemonic(width / 5 * 1, height/5 * 1);
+                Mnemonic(width / 5 * 1, height / 5 * 1);
             }
             // Shower Door Handle
             if (objectsi == 1) {
@@ -283,8 +263,8 @@ function draw() {
             // Timer
             countdown = ceil((timer - millis()) / 1000);
             if (state == 0) {
-                text("T-minus " + countdown, width / 2, height / 2 - 10);
-                text("Rotation " + endCounter + "C", width / 2, height / 2 + 10);
+                // text("T-minus " + countdown, width / 2, height / 2 - 10);
+                // text("Rotation " + endCounter + "C", width / 2, height / 2 + 10);
             } else if (state == 1) {
                 scene = 3;
                 vid.hide();
@@ -292,10 +272,10 @@ function draw() {
 
                 //Generate new frame    
                 var j = int(random(objectsFrames));
-                print(objectsi, j);
+                // print(objectsi, j);
                 while (j == objectsi) {
                     j = int(random(objectsFrames));
-                    print("match");
+                    // print("match");
                 }
                 objectsi = j;
                 state = 0;
@@ -304,7 +284,7 @@ function draw() {
                 timer = millis() + timerRotate;
                 endCounter = endCounter + 1;
                 state = 1;
-                print("EndCounter" + endCounter);
+                // print("EndCounter" + endCounter);
             }
 
             // Switch to end scene
@@ -316,6 +296,7 @@ function draw() {
 
     // End
     if (scene == 6) {
+        showerSFX.setVolume(0, 0.5);
         end();
     }
 }
@@ -386,15 +367,21 @@ function end() {
     background('#FFFFFF')
     fill(0);
 
-    text("T-minus " + countdown, width / 2, height / 2 - 10);
-    text("Rotation " + endCounter, width / 2, height / 2 + 10);
-    text("Yay, you made it to the end!", width / 2, height / 2 + 30);
+    text("Sometimes you’ll never", width / 2, height / 2 - 30);
+    text("know the value of a moment,", width / 2, height / 2 - 10);
+    text("until it becomes a memory.", width / 2, height / 2 + 10);
+    text("Dr Seuss", width / 2, height / 2 + 30);
+    
+    // Text fade
+    if (fade < 0) fadeAmount = 1;
+    if (fade > 255) fadeAmount = -10;
+    fade += fadeAmount;
 }
 
 function onVideoLoad() {
     // The media will not play untill some explicitly triggered.
-    //    vid.autoplay(true);
-    //    vid.volume(0);
+    // vid.autoplay(true);
+    // vid.volume(0);
 }
 
 // Fix autoplay issue on Chrome
@@ -407,8 +394,8 @@ function mousePressed() {
 }
 
 function sayDone(elt) {
-    vid.stop();
-    vid.hide();
+    // vid.stop();
+    // vid.hide();
     // scene = scene + 1;
 }
 
