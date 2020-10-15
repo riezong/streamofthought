@@ -32,28 +32,28 @@ var objectsi;
 
 // Declare video files
 var title = [
-    "https://riezong.github.io/streamofthought/data/Opening.mp4",
-];
+        "https://riezong.github.io/streamofthought/data/Opening.mp4"
+    ];
 
 var tap = [
-    "https://riezong.github.io/streamofthought/data/Tap Render.mp4",
-    "https://riezong.github.io/streamofthought/data/Tap Running Render.mp4",
-];
+        "https://riezong.github.io/streamofthought/data/Tap Render.mp4",
+        "https://riezong.github.io/streamofthought/data/Tap Running Render.mp4",
+    ];
 
 var bathroom = [
-    "https://riezong.github.io/streamofthought/data/Heater Light.mp4",
-    "https://riezong.github.io/streamofthought/data/Shower Door Handle.mp4",
-    "https://riezong.github.io/streamofthought/data/Shower Door.mp4",
-    "https://riezong.github.io/streamofthought/data/Shower Drain Inverted.mp4",
-    "https://riezong.github.io/streamofthought/data/Shower Faucet.mp4",
-    "https://riezong.github.io/streamofthought/data/Shower Head Running.mp4",
-];
+        "https://riezong.github.io/streamofthought/data/Heater Light.mp4",
+        "https://riezong.github.io/streamofthought/data/Shower Door Handle.mp4",
+        "https://riezong.github.io/streamofthought/data/Shower Door.mp4",
+        "https://riezong.github.io/streamofthought/data/Shower Drain Inverted.mp4",
+        "https://riezong.github.io/streamofthought/data/Shower Faucet.mp4",
+        "https://riezong.github.io/streamofthought/data/Shower Head Running.mp4",
+    ];
 
 var objects = [
-    "https://riezong.github.io/streamofthought/data/Radio.mp4",
-    "https://riezong.github.io/streamofthought/data/Snowglobe.mp4",
-    "https://riezong.github.io/streamofthought/data/VHS.mp4",
-];
+        "https://riezong.github.io/streamofthought/data/Radio.mp4",
+        "https://riezong.github.io/streamofthought/data/Snowglobe.mp4",
+        "https://riezong.github.io/streamofthought/data/VHS.mp4",
+    ];
 
 function preload() {
     soundFormats('mp3', 'ogg');
@@ -66,7 +66,7 @@ function setup() {
     // var canv = createCanvas(1920 / 2, 1080 / 2);
     // make div#canvas-container the parent of the created canvas
     // canv.parent("canvas-container");
-    createCanvas(windowWidth - 30, windowHeight - 5);
+    createCanvas(windowWidth - 30, windowHeight - 45);
     print("Dedicated to Louisa Liu")
 
     scene = 0;
@@ -82,7 +82,7 @@ function setup() {
     fade = 0;
 
     // Typography (Totally optional)
-    textAlign(LEFT);
+    textAlign(CENTER);
     textFont('Helvetica');
     textSize(18);
     //    textStyle('bold');
@@ -100,23 +100,8 @@ function draw() {
     if (scene == 0) {
         background('#ff8800');
         fill(255);
-
-        // Draft 1
-        //        text("Stream of Thought", width / 3, height / 2 - 70);
-        //        text("A randomly shuffled series of animations that depict", width / 3, height / 2 - 30);
-        //        text("two different spaces — the space of memory recall, and", width / 3, height / 2 - 10);
-        //        text("the objects that act as a visual mnemonic. Through", width / 3, height / 2 + 10);
-        //        text("juxtaposition, the audience is challenged to form closure", width / 3, height / 2 + 30);
-        //        text("and make sense of the non-linear visual narrative.", width / 3, height / 2 + 50);
-
-        // Draft 2
-        text("Stream of Thought", width / 3, height / 2 - 70);
-        text("A meditative exploration on the", width / 3, height / 2 - 30);
-        text("non-linear narratives found in our memory", width / 3, height / 2 - 10);
-
-        // CTA
-        text("When you are ready,", width / 3, height / 2 + 150);
-        text("please click to continue", width / 3, height / 2 + 170);
+        text("When you are ready,", width / 2, height / 2 - 10);
+        text("please click to start.", width / 2, height / 2 + 10);
     }
 
     // Introduction
@@ -176,7 +161,7 @@ function draw() {
         if (videoPlaying == false) {
             Kuleshov(width / 5 * 2, height / 5 * 2);
         } else {
-            background('#333333');
+            background('#FFFFFF');
             fill(0);
 
             // Timer
@@ -212,7 +197,7 @@ function draw() {
         if (videoPlaying == false) {
             // Heater Light
             if (bathroomi == 0) {
-                PlaceofRecall(width / 5 * 2, height / 5 * 0);
+                PlaceofRecall(width / 5 * 2, 0);
             }
             // Shower Door Handle
             if (bathroomi == 1) {
@@ -235,7 +220,7 @@ function draw() {
                 PlaceofRecall(width / 5 * 4, height / 5 * 1);
             }
         } else {
-            background('#333333');
+            background('#FFFFFF');
             fill(0);
 
             // Timer
@@ -282,7 +267,7 @@ function draw() {
                 Mnemonic(width / 5 * 1, height / 5 * 3);
             }
         } else {
-            background('#333333');
+            background('#FFFFFF');
             fill(0);
 
             // Timer
@@ -348,14 +333,14 @@ function intro() {
 }
 
 function Kuleshov(posX, posY) {
-    background('#333333');
+    background('#FFFFFF');
 
     // Load video
     vid = createVideo(tap[tapi]);
     var x = (windowWidth - width) / 2 - 15;
     var y = (windowHeight - height) / 2 - 2;
-    vid.position(0, 0);
-    vid.size(width, height);
+    vid.position(posX, posY);
+    vid.size(1920 / 4, 1080 / 4);
     vid.loop();
     vid.speed(1);
     vid.onended(sayDone);
@@ -363,15 +348,15 @@ function Kuleshov(posX, posY) {
 }
 
 function PlaceofRecall(posX, posY) {
-    background('#333333');
+    background('#FFFFFF');
     fill(0);
 
     // Load video
     vid = createVideo(bathroom[bathroomi]);
     var x = (windowWidth - width) / 2 - 15;
     var y = (windowHeight - height) / 2 - 2;
-    vid.position(0, 0);
-    vid.size(width, height);
+    vid.position(posX, posY);
+    vid.size(1920 / 4, 1080 / 4);
     vid.loop();
     vid.speed(1);
     vid.onended(sayDone);
@@ -379,15 +364,15 @@ function PlaceofRecall(posX, posY) {
 }
 
 function Mnemonic(posX, posY) {
-    background('#333333');
+    background('#FFFFFF');
     fill(0);
 
     // Load video
     vid = createVideo(objects[objectsi]);
     var x = (windowWidth - width) / 2 - 15;
     var y = (windowHeight - height) / 2 - 2;
-    vid.position(0, 0);
-    vid.size(width, height);
+    vid.position(posX, posY);
+    vid.size(1920 / 4, 1080 / 4);
     vid.loop();
     vid.speed(1);
     vid.onended(sayDone);
