@@ -63,10 +63,10 @@ function preload() {
 
 function setup() {
     // put setup code here
-    // var canv = createCanvas(1920 / 2, 1080 / 2);
+    var canv = createCanvas(windowWidth, windowHeight);
     // make div#canvas-container the parent of the created canvas
-    // canv.parent("canvas-container");
-    createCanvas(windowWidth - 30, windowHeight - 5);
+    canv.parent("canvas-container");
+    // createCanvas(windowWidth - 30, windowHeight - 5);
     print("Dedicated to Louisa Liu")
 
     scene = 0;
@@ -148,35 +148,12 @@ function draw() {
         }
     }
 
-    // Scene 2
-    if (scene == 2) {
-        background(255);
-        fill(255);
-        noStroke();
-
-        textHeaterLight(
-            width / 5 * 2, 0, width / 5, height / 5, width / 5, height / 5);
-        textShower(
-            width / 5 * 4, height / 5, width / 5, height / 5);
-        textTapText(
-            0, height / 5 * 2, width / 5, height / 5);
-        textShowerDoorHandle(
-            width / 5 * 2, height / 5 * 2, width / 5, height / 5);
-        textShowerHandle(
-            width / 5 * 3, height / 5 * 2, width / 5, height / 5);
-        textShowerDoor(
-            width / 5 * 2, height / 5 * 3, width / 5, height / 5);
-        textShowerDrain(
-            width / 5 * 3, height / 5 * 4, width / 5, height / 5);
-
-    }
-
     // Kuleshov
     if (scene == 3) {
         if (videoPlaying == false) {
             Kuleshov(width / 5 * 2, height / 5 * 2);
         } else {
-            background('#333333');
+            background('#ffffff');
             fill(0);
 
             // Timer
@@ -235,7 +212,7 @@ function draw() {
                 PlaceofRecall(width / 5 * 4, height / 5 * 1);
             }
         } else {
-            background('#333333');
+            background('#ffffff');
             fill(0);
 
             // Timer
@@ -282,7 +259,7 @@ function draw() {
                 Mnemonic(width / 5 * 1, height / 5 * 3);
             }
         } else {
-            background('#333333');
+            background('#ffffff');
             fill(0);
 
             // Timer
@@ -348,14 +325,12 @@ function intro() {
 }
 
 function Kuleshov(posX, posY) {
-    background('#333333');
+    background('#ffffff');
 
     // Load video
     vid = createVideo(tap[tapi]);
-    var x = (windowWidth - width) / 2 - 15;
-    var y = (windowHeight - height) / 2 - 2;
     vid.position(0, 0);
-    vid.size(width, height);
+    vid.size(width - 10, height - 10);
     vid.loop();
     vid.speed(1);
     vid.onended(sayDone);
@@ -363,15 +338,13 @@ function Kuleshov(posX, posY) {
 }
 
 function PlaceofRecall(posX, posY) {
-    background('#333333');
+    background('#ffffff');
     fill(0);
 
     // Load video
     vid = createVideo(bathroom[bathroomi]);
-    var x = (windowWidth - width) / 2 - 15;
-    var y = (windowHeight - height) / 2 - 2;
     vid.position(0, 0);
-    vid.size(width, height);
+    vid.size(width - 10, height - 10);
     vid.loop();
     vid.speed(1);
     vid.onended(sayDone);
@@ -379,15 +352,13 @@ function PlaceofRecall(posX, posY) {
 }
 
 function Mnemonic(posX, posY) {
-    background('#333333');
+    background('#ffffff');
     fill(0);
 
     // Load video
     vid = createVideo(objects[objectsi]);
-    var x = (windowWidth - width) / 2 - 15;
-    var y = (windowHeight - height) / 2 - 2;
     vid.position(0, 0);
-    vid.size(width, height);
+    vid.size(width - 10, height - 10);
     vid.loop();
     vid.speed(1);
     vid.onended(sayDone);
@@ -438,55 +409,4 @@ function sayDone(elt) {
     // vid.stop();
     // vid.hide();
     // scene = scene + 1;
-}
-
-// Text boxes
-
-function textHeaterLight(posX, posY, widthX, heightY) {
-    fill('#00B7D9');
-    rect(posX, posY, widthX, heightY);
-    fill(255);
-    text("whir", posX + widthX / 2, posY + heightY / 2);
-}
-
-function textShower(posX, posY, widthX, heightY) {
-    fill('#00B7D9');
-    rect(posX, posY, widthX, heightY);
-    fill(255);
-    text("pitter-patter", posX + widthX / 2, posY + heightY / 2);
-}
-
-function textTapText(posX, posY, widthX, heightY) {
-    fill('#00B7D9');
-    rect(posX, posY, widthX, heightY);
-    fill(255);
-    text("swoosh", posX + widthX / 2, posY + heightY / 2);
-}
-
-function textShowerDoorHandle(posX, posY, widthX, heightY) {
-    fill('#00B7D9');
-    rect(posX, posY, widthX, heightY);
-    fill(255);
-    text("knock-knock", posX + widthX / 2, posY + heightY / 2);
-}
-
-function textShowerHandle(posX, posY, widthX, heightY) {
-    fill('#00B7D9');
-    rect(posX, posY, widthX, heightY);
-    fill(255);
-    text("squeak", posX + widthX / 2, posY + heightY / 2);
-}
-
-function textShowerDoor(posX, posY, widthX, heightY) {
-    fill('#00B7D9');
-    rect(posX, posY, widthX, heightY);
-    fill(255);
-    text("plaaak", posX + widthX / 2, posY + heightY / 2);
-}
-
-function textShowerDrain(posX, posY, widthX, heightY) {
-    fill('#00B7D9');
-    rect(posX, posY, widthX, heightY);
-    fill(255);
-    text("gurgle", posX + widthX / 2, posY + heightY / 2);
 }
