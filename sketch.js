@@ -139,7 +139,7 @@ function draw() {
                 showerSFX.setVolume(0.5);
                 showerSFX.play();
                 state = 0;
-                scene = 3;
+                scene = 2;
             }
             if (timer < millis()) {
                 timer = millis() + timerRotate; // Reset timer
@@ -149,7 +149,7 @@ function draw() {
     }
 
     // Kuleshov
-    if (scene == 3) {
+    if (scene == 2) {
         if (videoPlaying == false) {
             Kuleshov(width / 5 * 2, height / 5 * 2);
         } else {
@@ -162,7 +162,7 @@ function draw() {
                 // text("T-minus " + countdown, width / 2, height / 2 - 10);
                 // text("Rotation " + endCounter + "A", width / 2, height / 2 + 10);
             } else if (state == 1) {
-                scene = 4;
+                scene = 3;
                 vid.hide();
                 videoPlaying = false;
 
@@ -185,7 +185,7 @@ function draw() {
     }
 
     // Place of Recall
-    if (scene == 4) {
+    if (scene == 3) {
         if (videoPlaying == false) {
             // Heater Light
             if (bathroomi == 0) {
@@ -221,7 +221,7 @@ function draw() {
                 // text("T-minus " + countdown, width / 2, height / 2 - 10);
                 // text("Rotation " + endCounter + "B", width / 2, height / 2 + 10);
             } else if (state == 1) {
-                scene = 5;
+                scene = 4;
                 vid.hide();
                 videoPlaying = false;
 
@@ -244,7 +244,7 @@ function draw() {
     }
 
     // Mnemonic
-    if (scene == 5) {
+    if (scene == 4) {
         if (videoPlaying == false) {
             // Heater Light
             if (objectsi == 0) {
@@ -268,7 +268,7 @@ function draw() {
                 // text("T-minus " + countdown, width / 2, height / 2 - 10);
                 // text("Rotation " + endCounter + "C", width / 2, height / 2 + 10);
             } else if (state == 1) {
-                scene = 3;
+                scene = 2;
                 vid.hide();
                 videoPlaying = false;
 
@@ -285,7 +285,7 @@ function draw() {
 
                 // Switch to end scene
                 if (endCounter == endTrue) {
-                    scene = 6;
+                    scene = 5;
                 }
             }
             if (timer < millis()) {
@@ -298,7 +298,7 @@ function draw() {
     }
 
     // End
-    if (scene == 6) {
+    if (scene == 5) {
         showerSFX.setVolume(0, 0.5);
         if (videoPlaying == false) {
             end();
@@ -330,7 +330,7 @@ function Kuleshov(posX, posY) {
     // Load video
     vid = createVideo(tap[tapi]);
     vid.position(0, 0);
-    vid.size(width - 10, height - 10);
+    vid.size(width, height);
     vid.loop();
     vid.speed(1);
     vid.onended(sayDone);
@@ -344,7 +344,7 @@ function PlaceofRecall(posX, posY) {
     // Load video
     vid = createVideo(bathroom[bathroomi]);
     vid.position(0, 0);
-    vid.size(width - 10, height - 10);
+    vid.size(width, height);
     vid.loop();
     vid.speed(1);
     vid.onended(sayDone);
@@ -358,7 +358,7 @@ function Mnemonic(posX, posY) {
     // Load video
     vid = createVideo(objects[objectsi]);
     vid.position(0, 0);
-    vid.size(width - 10, height - 10);
+    vid.size(width, height);
     vid.loop();
     vid.speed(1);
     vid.onended(sayDone);
@@ -379,15 +379,15 @@ function end() {
     vid.onended(sayDone);
     videoPlaying = true;
 
-    // text("Sometimes you’ll never", width / 2, height / 2 - 30);
-    // text("know the value of a moment,", width / 2, height / 2 - 10);
-    // text("until it becomes a memory.", width / 2, height / 2 + 10);
-    // text("Dr Seuss", width / 2, height / 2 + 30);
-    //    
-    // // Text fade
-    // if (fade < 0) fadeAmount = 1;
-    // if (fade > 255) fadeAmount = -10;
-    // fade += fadeAmount;
+    text("Sometimes you’ll never", width / 2, height / 2 - 30);
+    text("know the value of a moment,", width / 2, height / 2 - 10);
+    text("until it becomes a memory.", width / 2, height / 2 + 10);
+    text("Dr Seuss", width / 2, height / 2 + 30);
+
+    // Text fade
+    if (fade < 0) fadeAmount = 1;
+    if (fade > 255) fadeAmount = -10;
+    fade += fadeAmount;
 }
 
 function onVideoLoad() {
@@ -400,6 +400,7 @@ function onVideoLoad() {
 function mousePressed() {
     if (scene == 0) {
         scene = 1;
+        videoPlaying = false;
 
         song.play();
     } else {}
