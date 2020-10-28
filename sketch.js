@@ -30,30 +30,85 @@ var tapi;
 var bathroomi;
 var objectsi;
 
-// Declare video files
-var title = [
-    "https://riezong.github.io/streamofthought/data/Opening.mp4",
-];
-
+// Declare video files and corresponding audio files (if applicable)
 var tap = [
     "https://riezong.github.io/streamofthought/data/Tap Render.mp4",
+    "https://riezong.github.io/streamofthought/data/Tap Dripping Render.mp4",
     "https://riezong.github.io/streamofthought/data/Tap Running Render.mp4",
+    "https://riezong.github.io/streamofthought/data/Tap Running Full Render.mp4",
+];
+
+var tapSounds = [
+    "",
+    "",
+    "https://riezong.github.io/streamofthought/data/Tap.mp3",
+    "https://riezong.github.io/streamofthought/data/Tap.mp3",
 ];
 
 var bathroom = [
     "https://riezong.github.io/streamofthought/data/Heater Light.mp4",
-    "https://riezong.github.io/streamofthought/data/Shower Door Handle.mp4",
     "https://riezong.github.io/streamofthought/data/Shower Door.mp4",
+    "https://riezong.github.io/streamofthought/data/Shower Door Handle.mp4",
     "https://riezong.github.io/streamofthought/data/Shower Drain Inverted.mp4",
-    "https://riezong.github.io/streamofthought/data/Shower Faucet.mp4",
+    "https://riezong.github.io/streamofthought/data/Shower Faucet Running.mp4",
+    "https://riezong.github.io/streamofthought/data/Shower Faucet Rotated Render.mp4",
+    "https://riezong.github.io/streamofthought/data/Shower Head Render.mp4",
     "https://riezong.github.io/streamofthought/data/Shower Head Running.mp4",
 ];
 
+var bathroomSounds = [
+    "https://riezong.github.io/streamofthought/data/Heater Fan.mp3",
+    "https://riezong.github.io/streamofthought/data/Shower Door.mp3",
+    "https://riezong.github.io/streamofthought/data/Shower Door.mp3",
+    "",
+    "https://riezong.github.io/streamofthought/data/Shower Running.mp3",
+    "",
+    "",
+    "https://riezong.github.io/streamofthought/data/Shower Running.mp3",
+];
+
 var objects = [
-    "https://riezong.github.io/streamofthought/data/Radio.mp4",
-    "https://riezong.github.io/streamofthought/data/Snowglobe.mp4",
+    "https://riezong.github.io/streamofthought/data/Boardgame Render.mp4",
+    "https://riezong.github.io/streamofthought/data/Mahjong Render.mp4",
+    "https://riezong.github.io/streamofthought/data/Snowglobe Render.mp4",
+    "https://riezong.github.io/streamofthought/data/Snowglobe Still Render.mp4",
+    "https://riezong.github.io/streamofthought/data/Radio Tuning Render.mp4",
+    "https://riezong.github.io/streamofthought/data/Radio Antenna Render.mp4",
+    "https://riezong.github.io/streamofthought/data/Radio Antenna Render 2.mp4",
     "https://riezong.github.io/streamofthought/data/VHS.mp4",
 ];
+
+// Play button
+class button {
+    constructor(x_, y_, r_) {
+        // Location and size
+        this.x = x_;
+        this.y = y_;
+        this.r = r_;
+    }
+    // Is a point inside the doorbell? (used for mouse rollover, etc.)
+    contains(mx, my) {
+        return dist(mx, my, this.x, this.y) < this.r;
+    }
+
+    // Show the doorbell (hardcoded colors, could be improved)
+    display(mx, my) {
+        if (this.contains(mx, my)) {
+            fill('#FFE056');
+        } else {
+            fill('#333333');
+        }
+        stroke(0);
+        strokeWeight(0);
+        ellipseMode(RADIUS);
+        ellipse(this.x, this.y, this.r, this.r);
+
+        fill(255);
+        triangle(width / 2 - 10, height / 2 - 15, width / 2 - 10, height / 2 + 15, width / 2 + 15, height / 2);
+    }
+}
+
+let playButton;
 
 function preload() {
     soundFormats('mp3', 'ogg');
@@ -91,32 +146,25 @@ function setup() {
     tapi = int(random(tapFrames));
     bathroomi = int(random(bathroomFrames));
     objectsi = int(random(objectsFrames));
+
+    playButton = new button(width / 2, height / 2, 40);
 }
 
 function draw() {
     // put drawing code here    
 
-    // Scene 0
+    // Thumbnail
     if (scene == 0) {
-        background('#ff8800');
+        background(255);
         fill(255);
 
-        // Draft 1
-        //        text("Stream of Thought", width / 3, height / 2 - 70);
-        //        text("A randomly shuffled series of animations that depict", width / 3, height / 2 - 30);
-        //        text("two different spaces — the space of memory recall, and", width / 3, height / 2 - 10);
-        //        text("the objects that act as a visual mnemonic. Through", width / 3, height / 2 + 10);
-        //        text("juxtaposition, the audience is challenged to form closure", width / 3, height / 2 + 30);
-        //        text("and make sense of the non-linear visual narrative.", width / 3, height / 2 + 50);
+        thumbnail = createImg("https://riezong.github.io/streamofthought/data/Thumbnail.png", "");
+        var scale = 0.5;
+        imageMode(CENTER);
+        image(thumbnail, 0.5 * width, 0.5 * height, scale * width, scale * thumbnail.height * width / thumbnail.width); // to fit width
+        thumbnail.hide();
 
-        // Draft 2
-        text("Stream of Thought", width / 3, height / 2 - 70);
-        text("A meditative exploration on the", width / 3, height / 2 - 30);
-        text("non-linear narratives found in our memory", width / 3, height / 2 - 10);
-
-        // CTA
-        text("When you are ready,", width / 3, height / 2 + 150);
-        text("please click to continue", width / 3, height / 2 + 170);
+        playButton.display(mouseX, mouseY);
     }
 
     // Introduction
@@ -129,10 +177,7 @@ function draw() {
 
             // Timer
             countdown = ceil((timer - millis()) / 1000);
-            if (state == 0) {
-                // text("T-minus " + countdown, width / 2, height / 2 - 10);
-                // text("Rotation " + endCounter, width / 2, height / 2 + 10);
-            } else if (state == 1) {
+            if (state == 0) {} else if (state == 1) {
 
                 vid.hide();
                 videoPlaying = false;
@@ -158,10 +203,7 @@ function draw() {
 
             // Timer
             countdown = ceil((timer - millis()) / 1000);
-            if (state == 0) {
-                // text("T-minus " + countdown, width / 2, height / 2 - 10);
-                // text("Rotation " + endCounter + "A", width / 2, height / 2 + 10);
-            } else if (state == 1) {
+            if (state == 0) {} else if (state == 1) {
                 scene = 3;
                 vid.hide();
                 videoPlaying = false;
@@ -217,10 +259,7 @@ function draw() {
 
             // Timer
             countdown = ceil((timer - millis()) / 1000);
-            if (state == 0) {
-                // text("T-minus " + countdown, width / 2, height / 2 - 10);
-                // text("Rotation " + endCounter + "B", width / 2, height / 2 + 10);
-            } else if (state == 1) {
+            if (state == 0) {} else if (state == 1) {
                 scene = 4;
                 vid.hide();
                 videoPlaying = false;
@@ -264,10 +303,7 @@ function draw() {
 
             // Timer
             countdown = ceil((timer - millis()) / 1000);
-            if (state == 0) {
-                // text("T-minus " + countdown, width / 2, height / 2 - 10);
-                // text("Rotation " + endCounter + "C", width / 2, height / 2 + 10);
-            } else if (state == 1) {
+            if (state == 0) {} else if (state == 1) {
                 scene = 2;
                 vid.hide();
                 videoPlaying = false;
@@ -379,22 +415,13 @@ function end() {
     vid.onended(sayDone);
     videoPlaying = true;
 
-    text("Sometimes you’ll never", width / 2, height / 2 - 30);
-    text("know the value of a moment,", width / 2, height / 2 - 10);
-    text("until it becomes a memory.", width / 2, height / 2 + 10);
-    text("Dr Seuss", width / 2, height / 2 + 30);
-
     // Text fade
     if (fade < 0) fadeAmount = 1;
     if (fade > 255) fadeAmount = -10;
     fade += fadeAmount;
 }
 
-function onVideoLoad() {
-    // The media will not play untill some explicitly triggered.
-    // vid.autoplay(true);
-    // vid.volume(0);
-}
+function onVideoLoad() {}
 
 // Fix autoplay issue on Chrome
 function mousePressed() {
@@ -406,8 +433,4 @@ function mousePressed() {
     } else {}
 }
 
-function sayDone(elt) {
-    // vid.stop();
-    // vid.hide();
-    // scene = scene + 1;
-}
+function sayDone(elt) {}
