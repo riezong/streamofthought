@@ -21,9 +21,9 @@ var fadeAmount = 1
 var videoPlaying = false;
 
 // Total video files per scene in whole number
-var tapFrames = 2;
-var bathroomFrames = 6;
-var objectsFrames = 3;
+var tapFrames = 4;
+var bathroomFrames = 8;
+var objectsFrames = 8;
 
 // Used to generate a pull a random animation for each scene
 var tapi;
