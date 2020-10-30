@@ -38,12 +38,12 @@ var tap = [
     "https://riezong.github.io/streamofthought/data/Tap Running Full Render.mp4",
 ];
 
-var tapSounds = [
-    "",
-    "",
-    "https://riezong.github.io/streamofthought/data/Tap.mp3",
-    "https://riezong.github.io/streamofthought/data/Tap.mp3",
-];
+//var tapSounds = [
+//    "",
+//    "",
+//    "https://riezong.github.io/streamofthought/data/Tap.mp3",
+//    "https://riezong.github.io/streamofthought/data/Tap.mp3",
+//];
 
 var bathroom = [
     "https://riezong.github.io/streamofthought/data/Heater Light.mp4",
@@ -56,16 +56,16 @@ var bathroom = [
     "https://riezong.github.io/streamofthought/data/Shower Head Running.mp4",
 ];
 
-var bathroomSounds = [
-    "https://riezong.github.io/streamofthought/data/Heater Fan.mp3",
-    "https://riezong.github.io/streamofthought/data/Shower Door.mp3",
-    "https://riezong.github.io/streamofthought/data/Shower Door.mp3",
-    "",
-    "https://riezong.github.io/streamofthought/data/Shower Running.mp3",
-    "",
-    "",
-    "https://riezong.github.io/streamofthought/data/Shower Running.mp3",
-];
+//var bathroomSounds = [
+//    "https://riezong.github.io/streamofthought/data/Heater Fan.mp3",
+//    "https://riezong.github.io/streamofthought/data/Shower Door.mp3",
+//    "https://riezong.github.io/streamofthought/data/Shower Door.mp3",
+//    "",
+//    "https://riezong.github.io/streamofthought/data/Shower Running.mp3",
+//    "",
+//    "",
+//    "https://riezong.github.io/streamofthought/data/Shower Running.mp3",
+//];
 
 var objects = [
     "https://riezong.github.io/streamofthought/data/Boardgame Render.mp4",
@@ -196,7 +196,7 @@ function draw() {
     // Kuleshov
     if (scene == 2) {
         if (videoPlaying == false) {
-            Kuleshov(width / 5 * 2, height / 5 * 2);
+            Kuleshov();
         } else {
             background('#ffffff');
             fill(0);
@@ -229,30 +229,7 @@ function draw() {
     // Place of Recall
     if (scene == 3) {
         if (videoPlaying == false) {
-            // Heater Light
-            if (bathroomi == 0) {
-                PlaceofRecall(width / 5 * 2, height / 5 * 0);
-            }
-            // Shower Door Handle
-            if (bathroomi == 1) {
-                PlaceofRecall(width / 5 * 0, height / 5 * 2);
-            }
-            // Shower Door
-            if (bathroomi == 2) {
-                PlaceofRecall(width / 5 * 2, height / 5 * 3);
-            }
-            // Shower Drain
-            if (bathroomi == 3) {
-                PlaceofRecall(width / 5 * 3, height / 5 * 4);
-            }
-            // Shower Faucet
-            if (bathroomi == 4) {
-                PlaceofRecall(width / 5 * 3, height / 5 * 2);
-            }
-            // Shower Head
-            if (bathroomi == 5) {
-                PlaceofRecall(width / 5 * 4, height / 5 * 1);
-            }
+            PlaceofRecall();
         } else {
             background('#ffffff');
             fill(0);
@@ -285,18 +262,7 @@ function draw() {
     // Mnemonic
     if (scene == 4) {
         if (videoPlaying == false) {
-            // Heater Light
-            if (objectsi == 0) {
-                Mnemonic(width / 5 * 1, height / 5 * 1);
-            }
-            // Shower Door Handle
-            if (objectsi == 1) {
-                Mnemonic(width / 5 * 4, height / 5 * 2);
-            }
-            // Shower Door
-            if (objectsi == 2) {
-                Mnemonic(width / 5 * 1, height / 5 * 3);
-            }
+            Mnemonic();
         } else {
             background('#ffffff');
             fill(0);
